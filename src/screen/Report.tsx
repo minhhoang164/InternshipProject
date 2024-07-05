@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet, StatusBar, TouchableOpacity } from 'react-native';
 
-const HomeScreen = () => {
+
+const ReportScreen = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <StatusBar barStyle="light-content" backgroundColor="green" />
@@ -9,7 +10,7 @@ const HomeScreen = () => {
                 <Text style={styles.headerText}>BÁO CÁO TIẾP NHẬN MŨ</Text>
             </View>
             <View style={styles.buttonContainer}>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('ReportDetails')}>
                     <Text style={styles.buttonText}>Báo cáo</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.button}>
@@ -52,4 +53,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default HomeScreen;
+export default ReportScreen;
