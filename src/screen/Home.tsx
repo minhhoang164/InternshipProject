@@ -1,51 +1,77 @@
 
 import React from 'react';
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { COLORS } from '../theme/theme';
 
 function Home(): React.JSX.Element {
     return (
-        <SafeAreaView>
-            <View style={styles.container}>
-                <View style={styles.inner}>
-                    <View style={styles.buttonContainer}>
-                        <View style={styles.button}></View>
-                        <Text style={styles.textInButton}>BÁO CÁO MỦ NGÀY</Text>
-                    </View>
-                    <View style={styles.buttonContainer}>
-                        <View style={styles.button}></View>
-                        <Text style={styles.textInButton}>BÁO CÁO TIẾP NHẬN MỦ</Text>
-                    </View>
+        <View style={styles.container}>
+            <View style={styles.header}>
+                <View style={styles.spaceIconHeader}>
+                    <TouchableOpacity >
+                        <Image source={require('../images/logout.png')} style={styles.icon}></Image>
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                        <Image source={require('../images/user.png')} style={styles.icon}></Image>
+                    </TouchableOpacity>
                 </View>
             </View>
-        </SafeAreaView>
+            <View style={styles.footer}>
+                <TouchableOpacity style={styles.buttonContainer}>
+                    <View style={styles.button}>
+                        <Text style={styles.textInButton}>BÁO CÁO MỦ NGÀY</Text>
+                    </View>
+
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.buttonContainer}>
+                    <View style={styles.button}>
+                        <Text style={styles.textInButton}>BÁO CÁO TIẾP NHẬN MỦ</Text>
+                    </View>
+                </TouchableOpacity>
+            </View>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: COLORS.primaryWhiteHex
+        backgroundColor: COLORS.primaryWhiteHex,
     },
-    inner: {
-        justifyContent: 'center'
+    header: {
+        flex: 3
+    },
+    footer: {
+        flex: 7
     },
     button: {
         width: '70%',
-        height: 200,
+        height: 100,
         backgroundColor: COLORS.primaryLightGreyHex,
         borderRadius: 20,
-        borderWidth: 1
+        borderWidth: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     textInButton: {
         fontSize: 20,
-        color: COLORS.primaryBlackHex,
+        color: COLORS.primaryWhiteHex,
         fontWeight: 'bold'
     },
     buttonContainer: {
+        margin: 10,
         alignItems: 'center',
-        justifyContent: 'center'
-    }
+    },
+    spaceIconHeader: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    icon: {
+        width: 40,
+        height: 40,
+        resizeMode: 'stretch',
+        margin: 10
+    },
 });
 
 export default Home;
