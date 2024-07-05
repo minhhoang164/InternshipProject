@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Image, Modal, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, Modal, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { COLORS } from '../theme/theme';
 
 function DateReport(): React.JSX.Element {
@@ -12,7 +12,8 @@ function DateReport(): React.JSX.Element {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <View style={styles.headerContainer}>
+                <StatusBar barStyle="light-content" backgroundColor="green" />
+                <View style={styles.innerHeader}>
                     <TouchableOpacity>
                         <Image source={require('../images/back.png')} style={styles.icon}></Image>
                     </TouchableOpacity>
@@ -67,6 +68,12 @@ const styles = StyleSheet.create({
     header: {
         flex: 3,
     },
+    innerHeader: {
+        backgroundColor: 'green',
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center'
+    },
     footer: {
         flex: 7
     },
@@ -106,12 +113,12 @@ const styles = StyleSheet.create({
     },
     modalBackground: {
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: 'flex-end',
         alignItems: 'center',
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
     modalContainer: {
-        width: '80%',
+        width: '100%',
         backgroundColor: COLORS.primaryWhiteHex,
         borderRadius: 20,
         padding: 20,
@@ -123,7 +130,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderBottomColor: COLORS.primaryLightGreyHex,
         alignItems: 'center',
-        margin: 1
+        margin: 1,
     },
     modalButtonText: {
         fontSize: 18,
