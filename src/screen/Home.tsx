@@ -1,55 +1,81 @@
 import React from 'react';
-import { View, Text, StyleSheet, StatusBar, TouchableOpacity } from 'react-native';
+import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { COLORS } from '../theme/theme';
 
-const HomeScreen = () => {
+function DateReport(): React.JSX.Element {
     return (
         <View style={styles.container}>
-            <StatusBar barStyle="light-content" backgroundColor="green" />
             <View style={styles.header}>
-                <Text style={styles.headerText}>BÁO CÁO TIẾP NHẬN MŨ</Text>
+                <View style={styles.headerContainer}>
+                    <TouchableOpacity>
+                        <Image source={require('../images/logout.png')} style={styles.icon}></Image>
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                        <Image source={require('../images/user.png')} style={styles.icon}></Image>
+                    </TouchableOpacity>
+                </View>
             </View>
-            <View style={styles.buttonContainer}>
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.buttonText}>Báo cáo</Text>
+            <View style={styles.footer}>
+                <TouchableOpacity style={styles.buttonContainer}>
+                    <View style={styles.button}>
+                        <Text style={styles.textInButton}>BÁO CÁO MỦ NGÀY</Text>
+                    </View>
+
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.buttonText}>Xem lịch sử báo cáo</Text>
+                <TouchableOpacity style={styles.buttonContainer}>
+                    <View style={styles.button}>
+                        <Text style={styles.textInButton}>BÁO CÁO TIẾP NHẬN MỦ</Text>
+                    </View>
                 </TouchableOpacity>
             </View>
         </View>
     );
-};
+}
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: COLORS.primaryWhiteHex,
     },
     header: {
-        backgroundColor: 'green',
-        padding: 20,
+        flex: 3,
     },
-    headerText: {
-        color: 'white',
-        fontSize: 18,
-        textAlign: 'left',
-    },
-    buttonContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        padding: 20,
-        backgroundColor: 'white',
+    footer: {
+        flex: 7
     },
     button: {
-        backgroundColor: 'green',
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        borderRadius: 5,
+        width: '80%',
+        height: 100,
+        backgroundColor: COLORS.primaryLightGreyHex,
+        borderRadius: 20,
+        borderWidth: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
     },
-    buttonText: {
-        color: 'white',
-        fontSize: 16,
-        textAlign: 'center',
+    textInButton: {
+        fontSize: 20,
+        color: COLORS.primaryWhiteHex,
+        fontWeight: 'bold'
     },
+    buttonContainer: {
+        margin: 10,
+        alignItems: 'center',
+    },
+    icon: {
+        width: 40,
+        height: 40,
+        resizeMode: 'stretch',
+        margin: 10,
+    },
+    headerContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    textInHeader: {
+        color: COLORS.primaryWhiteHex,
+        fontSize: 24
+    }
 });
 
-export default HomeScreen;
+export default DateReport;
