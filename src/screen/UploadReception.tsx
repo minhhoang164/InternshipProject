@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { launchImageLibrary } from 'react-native-image-picker';
 
-function ImageUploadScreen({ navigation }): React.JSX.Element {
+function UploadReception({ navigation }): React.JSX.Element {
     const [selectedImage, setSelectedImage] = useState(null);
 
     const selectImage = () => {
@@ -97,4 +97,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default ImageUploadScreen;
+export default UploadReception;

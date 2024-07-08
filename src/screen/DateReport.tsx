@@ -9,7 +9,7 @@ function DateReport({navigation}): React.JSX.Element {
         setModalVisible(!modalVisible);
     };
     const handlePressToTakeAPhoto = () => {
-        navigation.navigate('ChupAnhBaoCaoNgay');
+        navigation.navigate('PhotoDateReport');
     };
     return (
         <View style={styles.container}>

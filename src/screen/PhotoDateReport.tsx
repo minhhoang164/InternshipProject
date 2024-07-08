@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Button, StyleSheet, Image, StatusBar } from 'react-native';
 import { launchCamera } from 'react-native-image-picker';
 
-function ChupAnhBaoCaoNgay() {
+function PhotoDateReport(): React.JSX.Element {
   const [photo, setPhoto] = useState(null);
 
   const takePhoto = () => {
@@ -51,4 +51,4 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
 });
-export default ChupAnhBaoCaoNgay;
+export default PhotoDateReport;
