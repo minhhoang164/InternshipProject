@@ -2,7 +2,7 @@ import React from 'react';
 import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { COLORS } from '../theme/theme';
 
-function DateReport(): React.JSX.Element {
+function Home(): React.JSX.Element {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -78,4 +78,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default DateReport;
+export default Home;

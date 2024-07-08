@@ -9,4 +9,7 @@ import {name as appName} from './app.json';
 import Home from './src/screen/Home';
 import DateReport from './src/screen/DateReport';
 import Report from './src/screen/Report';
-AppRegistry.registerComponent(appName, () => DateReport);
+import ChupAnhBaoCaoNgay from './src/screen/ChupAnhBaoCaoNgay';
+// import DateReportManage from './src/screen/DateReportManage';
+import ImageUploadScreen from './src/screen/ImageUpLoadReport';
+AppRegistry.registerComponent(appName, () => ImageUploadScreen);
