@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import { Image, Modal, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { COLORS } from '../theme/theme';
 
-function DateReport(): React.JSX.Element {
+function DateReport({navigation}): React.JSX.Element {
     const [modalVisible, setModalVisible] = useState(false);
 
     const handleModalToggle = () => {
         setModalVisible(!modalVisible);
     };
-
+    const handlePressToTakeAPhoto = () => {
+        navigation.navigate('ChupAnhBaoCaoNgay');
+    };
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -41,7 +43,7 @@ function DateReport(): React.JSX.Element {
             >
                 <View style={styles.modalBackground}>
                     <View style={styles.modalContainer}>
-                        <TouchableOpacity style={styles.modalButton} onPress={() => { /* Logic for capturing report image */ }}>
+                        <TouchableOpacity style={styles.modalButton} onPress={handlePressToTakeAPhoto}>
                             <Text style={styles.modalButtonText}>Chụp hình báo cáo</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.modalButton} onPress={() => { /* Logic for selecting report image */ }}>
@@ -80,7 +82,7 @@ const styles = StyleSheet.create({
     button: {
         width: '70%',
         height: 100,
-        backgroundColor: COLORS.primaryLightGreyHex,
+        backgroundColor: 'green',
         borderRadius: 20,
         borderWidth: 1,
         alignItems: 'center',
