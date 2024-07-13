@@ -1,8 +1,10 @@
 // import * as React from 'react';
 // import { NavigationContainer } from '@react-navigation/native';
 // import { createStackNavigator } from '@react-navigation/stack';
-// import ChupAnhBaoCaoNgay from './ChupAnhBaoCaoNgay';
+// import PhotoDateReport from './PhotoDateReport';
 // import DateReport from './DateReport';
+// import UploadDate from './UploadDate';
+// import DateInput from './DateInput';
 
 // const Stack = createStackNavigator();
 
@@ -12,8 +14,9 @@
 //             <Stack.Navigator initialRouteName="DateReport" screenOptions={{ headerShown: false }}>
 //                 <Stack.Screen name="DateReport"
 //                     component={DateReport} />
-//                 <Stack.Screen name="ChupAnhBaoCaoNgay" 
-//                     component={ChupAnhBaoCaoNgay} />
+//                     <Stack.Screen name="PhotoDateReport" component={PhotoDateReport} />
+//                 <Stack.Screen name="UploadDate" component={UploadDate} />
+//                 <Stack.Screen name="DateInput" component={DateInput} />
 //             </Stack.Navigator>
 //         </NavigationContainer>
 //   );

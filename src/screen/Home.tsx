@@ -2,7 +2,13 @@ import React from 'react';
 import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { COLORS } from '../theme/theme';
 
-function Home(): React.JSX.Element {
+function Home({navigation}): React.JSX.Element {
+    const handleToRecetionReport = () => {
+        navigation.navigate('Report')
+    }
+    const handleToDateReport = () => {
+        navigation.navigate('DateReport')
+    }
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -16,7 +22,7 @@ function Home(): React.JSX.Element {
                 </View>
             </View>
             <View style={styles.footer}>
-                <TouchableOpacity style={styles.buttonContainer}>
+                <TouchableOpacity style={styles.buttonContainer} onPress={handleToDateReport}>
                     <View style={styles.button}>
                         <Text style={styles.textInButton}>BÁO CÁO MỦ NGÀY</Text>
                     </View>

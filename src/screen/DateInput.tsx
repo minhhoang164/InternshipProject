@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TextInput, StyleSheet, ScrollView, StatusBar, TouchableOpacity, Switch } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
-const DateInput = () => {
+const DateInput = ({navigation}) => {
     const [date, setDate] = React.useState(new Date());
     const [show, setShow] = React.useState(false);
     const [isEnabled, setIsEnabled] = React.useState(false);
@@ -12,7 +12,9 @@ const DateInput = () => {
         setShow(false);
         setDate(currentDate);
     };
-
+    const goBack = () => {
+        navigation.goBack()
+    }
     const renderSection = (title, fields) => (
         <View style={styles.section} key={title}>
             <Text style={styles.sectionTitle}>{title}</Text>
@@ -29,7 +31,7 @@ const DateInput = () => {
         <View style={styles.container}>
             <StatusBar barStyle="light-content" backgroundColor="green" />
             <View style={styles.header}>
-                <TouchableOpacity style={styles.backButton}>
+                <TouchableOpacity style={styles.backButton} onPress={goBack}>
                     <Text style={[styles.buttonText, { fontSize: 25 }]}>⇦</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.button}>

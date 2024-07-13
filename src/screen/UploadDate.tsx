@@ -20,11 +20,13 @@ function UploadDate({ navigation }): React.JSX.Element {
     const resetImage = () => {
         setSelectedImage(null);
     };
-
+    const goBack = () => {
+        navigation.goBack()
+    }
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={goBack}>
                     <Image source={require('../images/back.png')} style={styles.icon}></Image>
                 </TouchableOpacity>
                 <Text style={styles.headerTitle}>Chọn tập tin</Text>
