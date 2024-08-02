@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { View, Button, StyleSheet, Image, StatusBar } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image, StatusBar, Button } from 'react-native';
 import { launchCamera } from 'react-native-image-picker';
 
-function PhotoReceptionReport(): React.JSX.Element  {
+function PhotoReceptionReport({ navigation }): React.JSX.Element {
   const [photo, setPhoto] = useState(null);
 
   const takePhoto = () => {
@@ -20,10 +20,21 @@ function PhotoReceptionReport(): React.JSX.Element  {
   return (
     <View style={styles.container}>
       <StatusBar barStyle="dark-content" />
-      <View style={styles.oval}>
-        {photo && <Image source={{ uri: photo }} style={styles.image} />}
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Image source={require('../images/back.png')} style={styles.icon} />
+        </TouchableOpacity>
+        <Text style={styles.headerTitle}>Chụp hình báo cáo</Text>
+        <TouchableOpacity style={styles.exitButton} onPress={() => setPhoto(null)}>
+          <Text style={styles.exitText}>Thoát</Text>
+        </TouchableOpacity>
       </View>
-      <Button title="Chụp hình" onPress={takePhoto} />
+      <View style={styles.contentContainer}>
+        <View style={styles.oval}>
+          {photo && <Image source={{ uri: photo }} style={styles.image} />}
+        </View>
+        <Button title="Chụp hình" onPress={takePhoto} />
+      </View>
     </View>
   );
 }
@@ -31,9 +42,31 @@ function PhotoReceptionReport(): React.JSX.Element  {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FFFFFF',
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: 'green',
+    padding: 15,
+  },
+  headerTitle: {
+    color: '#FFFFFF',
+    fontSize: 18,
+  },
+  exitButton: {
+    padding: 10,
+  },
+  exitText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+  },
+  contentContainer: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
+    paddingHorizontal: 20,
   },
   oval: {
     width: 200,
@@ -50,5 +83,11 @@ const styles = StyleSheet.create({
     height: 300,
     borderRadius: 100,
   },
+  icon: {
+    width: 30,
+    height: 30,
+    resizeMode: 'stretch',
+  },
 });
+
 export default PhotoReceptionReport;

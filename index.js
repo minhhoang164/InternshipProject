@@ -18,4 +18,6 @@ import DateReportManage from './src/screen/DateReportManage';
 import UploadDate from './src/screen/UploadDate';
 import UploadReception from './src/screen/UploadReception';
 import HomeManage from './src/screen/HomeManage';
-AppRegistry.registerComponent(appName, () => Manage);
+import Login from './src/screen/Login';
+import NavigatorLogin from './src/screen/NavigatorLogin';
+AppRegistry.registerComponent(appName, () => NavigatorLogin);

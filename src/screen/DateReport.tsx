@@ -24,7 +24,9 @@ function DateReport({ navigation }) {
     setModalVisible(false);
     navigation.navigate('DateInput');
   };
-
+  const handlePressToHistory = () => {
+    navigation.navigate('DateHistory');
+  }
   const goBack = () => {
     navigation.goBack();
   };
@@ -53,7 +55,7 @@ function DateReport({ navigation }) {
             <Text style={styles.textInButton}>BÁO CÁO</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.buttonContainer} onPress={handlePressToHistory}>
           <View style={styles.button}>
             <Text style={styles.textInButton}>XEM LỊCH SỬ BÁO CÁO</Text>
           </View>

@@ -7,22 +7,37 @@ import DateReport from './DateReport';
 import PhotoDateReport from './PhotoDateReport';
 import UploadDate from './UploadDate';
 import DateInput from './DateInput';
+import ReceptionReport from './ReceptionReport';
+import PhotoReceptionReport from './PhotoReceptionReport';
+import UploadReception from './UploadReception';
+import DateHistory from './DateHistory';
+import DateHistoryDetail from './DateHistoryDetail';
+import ReceptionHistory from './ReceptionHistory';
+import ReceptionHistoryDetail from './ReceptionHistoryDetail';
 // import DateReportManage from './DateReportManage';
 
 
 const Stack = createStackNavigator();
 
-function HomeManage(): React.JSX.Element {
+function HomeManage({route}): React.JSX.Element {
+  const {goBack} = route.params;
   return (
     <NavigationContainer independent={true}>
       <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Home"
-          component={Home} />
-
+          component={Home} initialParams={goBack}/>
+        
         <Stack.Screen name="DateReport" component={DateReport} />
         <Stack.Screen name="PhotoDateReport" component={PhotoDateReport} />
         <Stack.Screen name="UploadDate" component={UploadDate} />
         <Stack.Screen name="DateInput" component={DateInput} />
+        <Stack.Screen name="ReceptionReport" component={ReceptionReport} />
+        <Stack.Screen name="PhotoReceptionReport" component={PhotoReceptionReport} />
+        <Stack.Screen name="UploadReception" component={UploadReception} />
+        <Stack.Screen name="DateHistory" component={DateHistory} />
+        <Stack.Screen name="DateHistoryDetail" component={DateHistoryDetail}/>
+        <Stack.Screen name="ReceptionHistory" component={ReceptionHistory} />
+        <Stack.Screen name="ReceptionHistoryDetail" component={ReceptionHistoryDetail}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
