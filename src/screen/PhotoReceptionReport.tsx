@@ -1,20 +1,51 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image, StatusBar, Button } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image, StatusBar, Button, PermissionsAndroid } from 'react-native';
 import { launchCamera } from 'react-native-image-picker';
+import RNFS from 'react-native-fs';
 
-function PhotoReceptionReport({ navigation }): React.JSX.Element {
+function PhotoReceptionReport({ navigation }) {
   const [photo, setPhoto] = useState(null);
 
-  const takePhoto = () => {
-    launchCamera({ mediaType: 'photo', saveToPhotos: true }, (response) => {
-      if (response.didCancel) {
-        console.log('User cancelled image picker');
-      } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
+  const requestCameraPermission = async () => {
+    try {
+      const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA);
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        launchCamera({ mediaType: 'photo', saveToPhotos: true }, (response) => {
+          if (response.didCancel) {
+            console.log('User cancelled image picker');
+          } else if (response.error) {
+            console.log('ImagePicker Error: ', response.error);
+          } else {
+            setPhoto(response.assets[0].uri);
+          }
+        });
       } else {
-        setPhoto(response.assets[0].uri);
+        console.log('Tu choi');
       }
-    });
+    } catch (err) {
+      console.warn(err);
+    }
+  };
+
+  const savePhoto = async () => {
+    if (photo) {
+      const destPath = `${RNFS.ExternalStorageDirectoryPath}/Pictures/photo_${Date.now()}.jpg`;
+      const directoryPath = `${RNFS.ExternalStorageDirectoryPath}/Pictures`;
+
+      try {
+        // Create the directory if it doesn't exist
+        const dirExists = await RNFS.exists(directoryPath);
+        if (!dirExists) {
+          await RNFS.mkdir(directoryPath);
+        }
+
+        // Copy the file to the destination path
+        await RNFS.copyFile(photo, destPath);
+        console.log('Photo saved to', destPath);
+      } catch (error) {
+        console.log('Error saving photo:', error);
+      }
+    }
   };
 
   return (
@@ -33,7 +64,8 @@ function PhotoReceptionReport({ navigation }): React.JSX.Element {
         <View style={styles.oval}>
           {photo && <Image source={{ uri: photo }} style={styles.image} />}
         </View>
-        <Button title="Chụp hình" onPress={takePhoto} />
+        <Button title="Chụp hình" onPress={requestCameraPermission} />
+        <Button title="Gửi báo cáo" onPress={savePhoto} />
       </View>
     </View>
   );

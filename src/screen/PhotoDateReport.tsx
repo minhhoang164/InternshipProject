@@ -1,20 +1,31 @@
-import React, { useState } from 'react';
+import { Camera, CameraType } from 'expo-camera/legacy';
+import React, { useEffect, useRef, useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image, StatusBar, Button } from 'react-native';
-import { launchCamera } from 'react-native-image-picker';
+import * as MediaLibrary from 'expo-media-library';
 
-function PhotoDateReport({ navigation }): React.JSX.Element {
+function PhotoDateReport({ navigation }) {
   const [photo, setPhoto] = useState(null);
+  const [hasCameraPermission, setHasCameraPermission] = useState(null);
+  const [camera, setCamera ] = useState(null);
+  const [image, setImage] = useState(null);
+  const [type, setType] = useState(CameraType.back)
 
-  const takePhoto = () => {
-    launchCamera({ mediaType: 'photo', saveToPhotos: true }, (response) => {
-      if (response.didCancel) {
-        console.log('User cancelled image picker');
-      } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
-      } else {
-        setPhoto(response.assets[0].uri);
-      }
-    });
+  useEffect(() => {
+    (async () => {
+      const cameraStatus = await Camera.requestCameraPermissionsAsync();
+      setHasCameraPermission(cameraStatus.status === 'granted');
+    })();
+  }, []);
+
+  if (hasCameraPermission === false) {
+    return <Text>No Camera Access</Text>;
+  }
+
+  const takePicture = async () => {
+    if (camera) {
+      const data = await camera.takePictureAsync(null)
+      setImage(data.uri)
+    }
   };
 
   return (
@@ -30,10 +41,17 @@ function PhotoDateReport({ navigation }): React.JSX.Element {
         </TouchableOpacity>
       </View>
       <View style={styles.contentContainer}>
-        <View style={styles.oval}>
-          {photo && <Image source={{ uri: photo }} style={styles.image} />}
+        <View style={styles.cameraContainer}>
+          {photo ? (
+            <Image source={{ uri: photo }} style={styles.image} />
+          ) : (
+            <Camera style={styles.camera} type={CameraType.back}>
+              <View style={styles.cameraOverlay}>
+                <Button title="Chụp hình" onPress={takePicture} />
+              </View>
+            </Camera>
+          )}
         </View>
-        <Button title="Chụp hình" onPress={takePhoto} />
       </View>
     </View>
   );
@@ -68,20 +86,29 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 20,
   },
-  oval: {
+  cameraContainer: {
     width: 200,
     height: 300,
-    borderRadius: 100,
-    borderWidth: 1,
-    borderColor: '#000000',
+    borderRadius: 20,
+    overflow: 'hidden',
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 20,
   },
+  camera: {
+    width: '100%',
+    height: '100%',
+  },
+  cameraOverlay: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    paddingBottom: 20,
+  },
   image: {
-    width: 200,
-    height: 300,
-    borderRadius: 100,
+    width: '100%',
+    height: '100%',
+    borderRadius: 20,
   },
   icon: {
     width: 30,
