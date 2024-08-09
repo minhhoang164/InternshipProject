@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { launchImageLibrary } from 'react-native-image-picker';
+import axios from 'axios';
 
-function UploadDate({ navigation }): React.JSX.Element {
+function UploadDate({ navigation }) {
     const [selectedImage, setSelectedImage] = useState(null);
 
     const selectImage = () => {
@@ -17,20 +18,28 @@ function UploadDate({ navigation }): React.JSX.Element {
         });
     };
 
-    const resetImage = () => {
-        setSelectedImage(null);
+    const submitReport = async () => {
+        if (selectedImage) {
+            const fileName = selectedImage.split('/').pop(); // Lấy tên file từ đường dẫn
+            try {
+                await axios.post('http://localhost:3000/upload', { imageLink: fileName });
+                alert('Báo cáo đã được nộp thành công!');
+            } catch (error) {
+                console.error('Error uploading image:', error);
+            }
+        } else {
+            alert('Vui lòng chọn ảnh trước khi nộp báo cáo.');
+        }
     };
-    const goBack = () => {
-        navigation.goBack()
-    }
+
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <TouchableOpacity onPress={goBack}>
+                <TouchableOpacity onPress={() => navigation.goBack()}>
                     <Image source={require('../images/back.png')} style={styles.icon}></Image>
                 </TouchableOpacity>
                 <Text style={styles.headerTitle}>Chọn tập tin</Text>
-                <TouchableOpacity onPress={resetImage}>
+                <TouchableOpacity onPress={() => setSelectedImage(null)}>
                     <Text style={styles.exitText}>Thoát</Text>
                 </TouchableOpacity>
             </View>
@@ -43,9 +52,12 @@ function UploadDate({ navigation }): React.JSX.Element {
                     </TouchableOpacity>
                 )}
             </View>
+            <TouchableOpacity style={styles.submitButton} onPress={submitReport}>
+                <Text style={styles.submitButtonText}>Nộp báo cáo</Text>
+            </TouchableOpacity>
         </View>
     );
-};
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -96,6 +108,18 @@ const styles = StyleSheet.create({
         width: 30,
         height: 30,
         resizeMode: 'stretch',
+    },
+    submitButton: {
+        width: '80%',
+        padding: 15,
+        backgroundColor: '#007BFF',
+        borderRadius: 10,
+        alignItems: 'center',
+        marginTop: 20,
+    },
+    submitButtonText: {
+        color: '#FFFFFF',
+        fontSize: 18,
     },
 });
 
