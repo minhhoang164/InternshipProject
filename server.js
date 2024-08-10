@@ -20,10 +20,11 @@ sql.connect(config, function(err) {
 });
 
 app.post('/upload', (req, res) => {
-    const { imageLink } = req.body;
+    const { imageLink, userId, waterLevelArea, date, attendancePoint, personalEquipmentCheck, confirmSign } = req.body;
     
     const request = new sql.Request();
-    const query = `INSERT INTO DateReport (ImageLink) VALUES ('${imageLink}')`;
+    const query = `INSERT INTO DateReport (user_id, water_level_area, date, attendance_point, personal_equipment_check, confirm_sign, imageLink)
+                   VALUES ('${userId}', '${waterLevelArea}', '${date}', '${attendancePoint}', '${personalEquipmentCheck}', '${confirmSign}', '${imageLink}')`;
 
     request.query(query, (err, result) => {
         if (err) {
@@ -34,6 +35,7 @@ app.post('/upload', (req, res) => {
         }
     });
 });
+
 
 app.listen(3000, () => {
     console.log('Server is running on port 3000');

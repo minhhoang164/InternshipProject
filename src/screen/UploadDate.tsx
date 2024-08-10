@@ -22,7 +22,15 @@ function UploadDate({ navigation }) {
         if (selectedImage) {
             const fileName = selectedImage.split('/').pop(); // Lấy tên file từ đường dẫn
             try {
-                await axios.post('http://localhost:3000/upload', { imageLink: fileName });
+                await axios.post('http://192.168.1.94:3000/upload', {
+                    imageLink: fileName,
+                    userId: 1, // Thay thế bằng ID người dùng thực tế
+                    waterLevelArea: 'Khu vực A',
+                    date: new Date().toISOString().split('T')[0], // Ngày hiện tại
+                    attendancePoint: 'Điểm danh 1',
+                    personalEquipmentCheck: 'Đã kiểm tra',
+                    confirmSign: 'Đã ký'
+                });
                 alert('Báo cáo đã được nộp thành công!');
             } catch (error) {
                 console.error('Error uploading image:', error);
@@ -31,6 +39,7 @@ function UploadDate({ navigation }) {
             alert('Vui lòng chọn ảnh trước khi nộp báo cáo.');
         }
     };
+    
 
     return (
         <View style={styles.container}>
@@ -51,10 +60,11 @@ function UploadDate({ navigation }) {
                         <Text style={styles.uploadButtonText}>Chọn tập tin</Text>
                     </TouchableOpacity>
                 )}
-            </View>
-            <TouchableOpacity style={styles.submitButton} onPress={submitReport}>
+                <TouchableOpacity style={styles.submitButton} onPress={submitReport}>
                 <Text style={styles.submitButtonText}>Nộp báo cáo</Text>
             </TouchableOpacity>
+            </View>
+            
         </View>
     );
 }
@@ -110,7 +120,7 @@ const styles = StyleSheet.create({
         resizeMode: 'stretch',
     },
     submitButton: {
-        width: '80%',
+        width: '50%',
         padding: 15,
         backgroundColor: '#007BFF',
         borderRadius: 10,
