@@ -9,7 +9,8 @@ import More from './More';
 
 const Tab = createBottomTabNavigator();
 
-function Manage({navigation}) {
+function Manage({navigation, route}) {
+    //const {account, user} = route.params;
     const goBack = () => {
         navigation.goBack();
       }

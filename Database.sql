@@ -33,7 +33,7 @@ CREATE TABLE DateReport(
 	user_id INT,
 	water_level_area VARCHAR(255),
 	date DATE,
-	attendance_point VARCHAR(255),
+	attendance_point BIT,
 	personal_equipment_check VARCHAR(255),
 	confirm_sign VARCHAR(255),
 	imageLink VARCHAR(255),

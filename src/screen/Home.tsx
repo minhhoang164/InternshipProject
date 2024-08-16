@@ -3,7 +3,7 @@ import { Image, ImageBackground, SafeAreaView, StyleSheet, Text, TouchableOpacit
 import { COLORS } from '../theme/theme';
 
 function Home({ navigation, route }): React.JSX.Element {
-  const {goBack} = route.params;
+  const {user, goBack} = route.params;
   const handleToDateReport = () => {
     navigation.navigate('DateReport')
   }
@@ -18,7 +18,7 @@ function Home({ navigation, route }): React.JSX.Element {
             <TouchableOpacity>
               <Image source={require('../images/user.png')} style={styles.icon} />
             </TouchableOpacity>
-            <Text style={styles.textInHeader}>Xin chào, Hiếu</Text>
+            <Text style={styles.textInHeader}>Xin chào, Hieu</Text>
           </View>
           <TouchableOpacity onPress={goBack}>
             <Image source={require('../images/switch.png')} style={styles.icon} />

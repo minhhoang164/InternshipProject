@@ -1,21 +1,55 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, ImageBackground, TextInput, TouchableOpacity, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Image, ImageBackground, TextInput, TouchableOpacity, Dimensions, Alert } from 'react-native';
 
 function Login({ navigation }): React.JSX.Element {
     const screenWidth = Dimensions.get('window').width;
-    const [email, setEmail] = useState('');
+    const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
-    const [result, setResult] = useState(false);
     const [hidePass, setHidePass] = useState(true);
+
     const onPressHide = () => {
-        if (hidePass == false) {
-            setHidePass(true);
-        }
-        else setHidePass(false);
+        setHidePass(!hidePass);
     }
-    const LoginHandlerToManage = () => {
-        navigation.navigate('Manage')
-    }
+
+    const LoginHandlerToManage = async () => {
+        // try {
+        //     const response = await fetch('http://192.168.1.212:3000/login', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //         },
+        //         body: JSON.stringify({
+        //             username: username,
+        //             password: password,
+        //         }),
+        //     });
+        
+        //     if (response.status === 200) {
+        //         const result = await response.json();
+        //         console.log(result);  // Log kết quả để kiểm tra
+    
+        //         if (result.account && result.user) {
+        //             navigation.navigate('Manage', {
+        //                 account: result.account,
+        //                 user: result.user
+        //             });
+        //         } else {
+        //             Alert.alert('Login Failed', 'Account or user information not found');
+        //         }
+        //     } else {
+        //         const errorResult = await response.json();
+        //         Alert.alert('Login Failed', errorResult.message || 'Invalid email or password');
+        //     }
+        // } catch (error) {
+        //     console.error('Login error:', error);
+        //     Alert.alert('Login Error', 'There was an error logging in. Please try again.');
+        // }
+            navigation.navigate('Manage');
+    };
+    
+    
+    
+
     return (
         <ImageBackground style={styles.background}
             source={require('../images/background.jpg')} >
@@ -32,11 +66,10 @@ function Login({ navigation }): React.JSX.Element {
                         TÊN CÔNG TY</Text>
                     <View style={[styles.textBox]}>
                         <TextInput
-                            keyboardType='email-address'
-                            placeholder='Email'
+                            placeholder='Username'
                             style={styles.textInput}
-                            value={email}
-                            onChangeText={(text) => setEmail(text)}
+                            value={username}
+                            onChangeText={(text) => setUserName(text)}
                         />
                     </View>
                     <View style={[styles.textBox]}>
@@ -58,7 +91,7 @@ function Login({ navigation }): React.JSX.Element {
                             Forgot your password?</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={[styles.button]} onPress={() => LoginHandlerToManage()}>
+                    <TouchableOpacity style={[styles.button]} onPress={LoginHandlerToManage}>
                         <Text style={[styles.fontWeight, { fontSize: 14, color: 'white' }]}>
                             Login</Text>
                     </TouchableOpacity>
@@ -70,12 +103,9 @@ function Login({ navigation }): React.JSX.Element {
                                 Sign up</Text>
                         </TouchableOpacity>
                     </View>
-
                 </View>
             </View>
         </ImageBackground>
-
-
     );
 }
 

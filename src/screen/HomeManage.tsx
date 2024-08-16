@@ -14,13 +14,15 @@ import DateHistory from './DateHistory';
 import DateHistoryDetail from './DateHistoryDetail';
 import ReceptionHistory from './ReceptionHistory';
 import ReceptionHistoryDetail from './ReceptionHistoryDetail';
+import EditData from './EditData';
+import ReceptionInput from './ReceptionInput';
 // import DateReportManage from './DateReportManage';
 
 
 const Stack = createStackNavigator();
 
 function HomeManage({route}): React.JSX.Element {
-  const {goBack} = route.params;
+  const {user, goBack} = route.params;
   return (
     <NavigationContainer independent={true}>
       <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
@@ -38,6 +40,8 @@ function HomeManage({route}): React.JSX.Element {
         <Stack.Screen name="DateHistoryDetail" component={DateHistoryDetail}/>
         <Stack.Screen name="ReceptionHistory" component={ReceptionHistory} />
         <Stack.Screen name="ReceptionHistoryDetail" component={ReceptionHistoryDetail}/>
+        <Stack.Screen name="ReceptionInput" component={ReceptionInput}/>
+        <Stack.Screen name="EditData" component={EditData}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
